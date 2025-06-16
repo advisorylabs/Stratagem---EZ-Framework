@@ -47,7 +47,7 @@ void default_constants() {
 
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
 
-  chassis.drive_imu_scaler_set(1.2); // This is the multiplier for the IMU scale
+  chassis.drive_imu_scaler_set(1.0225); // This is the multiplier for the IMU scale
 }
 
 ///
