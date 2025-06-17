@@ -6,9 +6,9 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 110;
-const int TURN_SPEED = 90;
-const int SWING_SPEED = 110;
+const int DRIVE_SPEED = 80;
+const int TURN_SPEED = 60;
+const int SWING_SPEED = 80;
 
 ///
 // Constants
@@ -315,7 +315,7 @@ void measure_offsets() {
   int iterations = 10;
 
   // Our final offsets
-  double l_offset = 0.0, r_offset = -7.88571, b_offset = -15.748571, f_offset = 0.0;
+  double l_offset = 0.0, r_offset = -7.88571, b_offset = 0.0, f_offset = -14.75; // b offset -15.748571
 
   // Reset all trackers if they exist
   if (chassis.odom_tracker_left != nullptr) chassis.odom_tracker_left->reset();
