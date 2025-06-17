@@ -21,8 +21,8 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
- ez::tracking_wheel horiz_tracker(11, 2.75, 1.50);  // This tracking wheel is perpendicular to the drive wheels 3.625
- ez::tracking_wheel vert_tracker(2, 2.75, -3.53);   // This tracking wheel is parallel to the drive wheels 1.625
+ ez::tracking_wheel horiz_tracker(11, 2.5359, 2.508571);  // This tracking wheel is perpendicular to the drive wheels 3.625
+ ez::tracking_wheel vert_tracker(3, 2.6515, -5.117142);   // This tracking wheel is parallel to the drive wheels 1.625
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -175,6 +175,10 @@ void ez_screen_task() {
           screen_print_tracker(chassis.odom_tracker_back, "b", 6);
           screen_print_tracker(chassis.odom_tracker_front, "f", 7);
         }
+        else if (ez::as::page_blank_is_on(1)) {
+           ez::screen_print("Left: " + util::to_string_with_precision(chassis.odom_tracker_right->get()) +
+                            "\nRight: " + util::to_string_with_precision(chassis.odom_tracker_back->get()), 1);
+         }   
       }
     }
 
@@ -254,9 +258,9 @@ void opcontrol() {
     // chassis.opcontrol_arcade_flipped(ez::SPLIT);    // Flipped split arcade
     // chassis.opcontrol_arcade_flipped(ez::SINGLE);   // Flipped single arcade
 
-    // . . .
-    // Put more user control code here!
-    // . . .
+    if (master.get_digital(DIGITAL_L1)) {
+  chassis.drive_sensor_reset();
+}
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }

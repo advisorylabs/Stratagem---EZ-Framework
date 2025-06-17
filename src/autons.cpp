@@ -48,6 +48,10 @@ void default_constants() {
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
 
   chassis.drive_imu_scaler_set(1.0225); // This is the multiplier for the IMU scale
+  chassis.pid_tuner_full_enable(false);
+  chassis.pid_tuner_increment_p_set(1);  // This sets the increment for the P value in the PID Tuner
+  chassis.pid_tuner_increment_i_set(0.01); // This sets the increment for the I value in the PID Tuner
+  chassis.pid_tuner_increment_d_set(10);  // This sets the increment for the D value in the PID Tuner
 }
 
 ///
@@ -311,7 +315,7 @@ void measure_offsets() {
   int iterations = 10;
 
   // Our final offsets
-  double l_offset = 0.0, r_offset = 0.0, b_offset = 0.0, f_offset = 0.0;
+  double l_offset = 0.0, r_offset = -7.88571, b_offset = -15.748571, f_offset = 0.0;
 
   // Reset all trackers if they exist
   if (chassis.odom_tracker_left != nullptr) chassis.odom_tracker_left->reset();
