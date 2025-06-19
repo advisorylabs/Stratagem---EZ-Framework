@@ -21,8 +21,8 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
- ez::tracking_wheel horiz_tracker(11, 2.5359, 2.508571);  // This tracking wheel is perpendicular to the drive wheels 2.508571
- ez::tracking_wheel vert_tracker(3, 2.6515, 3.26);   // This tracking wheel is parallel to the drive wheels -5.117142
+ ez::tracking_wheel horiz_tracker(-14, 2.5359, 4.9014285);  // This tracking wheel is perpendicular to the drive wheels 4.9014285
+ ez::tracking_wheel vert_tracker(4, 2.6515, 3.26);   // This tracking wheel is parallel to the drive wheels -5.117142
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -177,7 +177,7 @@ void ez_screen_task() {
         }
         else if (ez::as::page_blank_is_on(1)) {
            ez::screen_print("Left: " + util::to_string_with_precision(chassis.odom_tracker_right->get()) +
-                            "\nRight: " + util::to_string_with_precision(chassis.odom_tracker_back->get()), 1);
+                            "\nRight: " + util::to_string_with_precision(chassis.odom_tracker_front->get()), 1);
          }   
       }
     }

@@ -6,7 +6,7 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 80;
+const int DRIVE_SPEED = 50;
 const int TURN_SPEED = 60;
 const int SWING_SPEED = 80;
 
@@ -253,15 +253,17 @@ void odom_drive_example() {
 ///
 void odom_pure_pursuit_example() {
   // Drive to 0, 30 and pass through 6, 10 and 0, 20 on the way, with slew
-  chassis.pid_odom_set({{{6_in, 10_in}, fwd, DRIVE_SPEED},
-                        {{0_in, 20_in}, fwd, DRIVE_SPEED},
-                        {{0_in, 30_in}, fwd, DRIVE_SPEED}},
+  chassis.pid_odom_set({{{12_in, 24_in}, fwd, DRIVE_SPEED},
+                        {{0_in, 30_in}, fwd, DRIVE_SPEED},
+                        {{-24_in, 24_in}, fwd, DRIVE_SPEED}},
                        true);
   chassis.pid_wait();
 
   // Drive to 0, 0 backwards
-  chassis.pid_odom_set({{0_in, 0_in}, rev, DRIVE_SPEED},
+  chassis.pid_odom_set({{0_in, 0_in}, fwd, DRIVE_SPEED},
                        true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(0_deg, TURN_SPEED);  // Turn to face the front of the field
   chassis.pid_wait();
 }
 
@@ -287,7 +289,7 @@ void odom_boomerang_example() {
                        true);
   chassis.pid_wait();
 
-  chassis.pid_odom_set({{0_in, 0_in, 0_deg}, rev, DRIVE_SPEED},
+  chassis.pid_odom_set({{0_in, 0_in}, rev, DRIVE_SPEED},
                        true);
   chassis.pid_wait();
 }
@@ -315,7 +317,7 @@ void measure_offsets() {
   int iterations = 10;
 
   // Our final offsets
-  double l_offset = 0.0, r_offset = -7.88571, b_offset = 0.0, f_offset = -14.75; // b offset -15.748571
+  double l_offset = 0.0, r_offset = -7.88571, b_offset = 0.0, f_offset = -15.427142; // b offset -15.748571 f offset -15.427142
 
   // Reset all trackers if they exist
   if (chassis.odom_tracker_left != nullptr) chassis.odom_tracker_left->reset();
